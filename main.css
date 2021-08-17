@@ -3,9 +3,11 @@
     --white: white;
     --gray: #eee;
     --square: rgb(68, 68, 131);
+    --red: red;
 }
 
 * {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: var(--black);
     font-family: sans-serif;
@@ -21,13 +23,23 @@ html, body {
 
 body {
     background-color: var(--gray);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 
 .header {
     margin: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
 
@@ -37,6 +49,7 @@ h1 {
     font-weight: bold;
     text-align: left;
     padding: 10px;
+    white-space: nowrap;
 }
 
 label {
@@ -44,6 +57,23 @@ label {
     font-weight: bold;
     text-align: left;
     padding: 10px;
+    white-space: nowrap;
+}
+
+#exit {
+    margin: 0;
+    background-color: var(--red);
+    padding: 5px 15px;
+    border: 1px solid var(--black);
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    white-space: nowrap;
+    color: var(--black);
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 .game {
@@ -54,8 +84,13 @@ label {
     height: 100vw;
     border: 5px solid var(--border);
     overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
     align-self: center;
 }
 
@@ -68,11 +103,15 @@ label {
 
 .square:hover {
     border: 1px solid var(--black);
+    -webkit-box-shadow: 0px 0px 30px var(--gray);
     box-shadow: 0px 0px 30px var(--gray);
     z-index: 100;
 }
 
 .colorSelect {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
