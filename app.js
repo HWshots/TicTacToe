@@ -7,15 +7,14 @@ console.log("Vez do jogador " + player + " ->");
 const color1 = document.getElementById("color1");
 const color2 = document.getElementById("color2");
 
-let color1play = color1.value;
-let color2play = color2.value;
-
 function init() {
     for (let i = 0; i < 9; i++) {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        game.appendChild(square);
+        const div = document.createElement("div");
+        div.classList.add("square");
+        game.appendChild(div);
     }
+    viewportSize();
+    colorSelect();
     play();
 }
 init();
@@ -30,17 +29,37 @@ function play() {
                 jogadas++;
                 if (player == 1) {
                     squareN[j] = 1;
-                    this.style.backgroundColor = color1.value;
+                    this.classList.add("player1");
+                    this.textContent = "X";
                 } else if (player == 2) {
                     squareN[j] = 2;
-                    this.style.backgroundColor = color2.value;
+                    this.classList.add("player2");
+                    this.textContent = "O";
                 }
                 console.log("Jogador: " + squareN[j] + " posição: " + (j + 1));
                 check();
             }
-
+            colorChange();
 
         };
+    }
+}
+
+function colorSelect() {
+    const colorInput = document.querySelectorAll(".colorSelect input");
+    for (let j = 0; j < colorInput.length; j++) {
+        colorInput[j].addEventListener("change", colorChange);
+    }
+}
+
+function colorChange() {
+    const player1color = document.getElementsByClassName("player1");
+    for (let k = 0; k < player1color.length; k++) {
+        player1color[k].style.backgroundColor = color1.value;
+    }
+    const player2color = document.getElementsByClassName("player2");
+    for (let l = 0; l < player2color.length; l++) {
+        player2color[l].style.backgroundColor = color2.value;
     }
 }
 
@@ -79,11 +98,66 @@ function reset() {
     init();
 }
 
+const newGame = document.querySelector(".header button");
+newGame.addEventListener("click", reset);
+
 const exit = document.querySelector("#exit");
-exit.addEventListener("click", function(){
+exit.addEventListener("click", function () {
     if (confirm('Quer mesmo sair?')) {
-        location.href='/';
+        location.href = '/';
     } else {
         return false;
     }
 });
+
+function viewportSize() {
+    let viewPortWidth;
+    let viewPortHeight;
+    // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+    if (typeof window.innerWidth != 'undefined') {
+        viewPortWidth = window.innerWidth,
+            viewPortHeight = window.innerHeight
+    }
+    // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+    else if (typeof document.documentElement != 'undefined'
+        && typeof document.documentElement.clientWidth !=
+        'undefined' && document.documentElement.clientWidth != 0) {
+        viewPortWidth = document.documentElement.clientWidth,
+            viewPortHeight = document.documentElement.clientHeight
+    }
+    // older versions of IE
+    else {
+        viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
+            viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
+    }
+    if (viewPortWidth > (viewPortHeight - 130)) {
+        game.style.width = "calc(100vh - 130px)";
+        game.style.height = "calc(100vh - 130px)";
+        mediaQ();
+    } else {
+        game.style.width = "100vw";
+        game.style.height = "100vw";
+        mediaQ();
+    }
+}
+
+function mediaQ() {
+    const square = document.getElementsByClassName("square");
+    if (window.matchMedia("(max-width: 600px)").matches) {
+        for (let i = 0; i < square.length; i++) {
+            square[i].style.fontSize = "30vw";
+        }
+    } else if (window.matchMedia("(max-height: 730px)").matches) {
+        for (let i = 0; i < square.length; i++) {
+            square[i].style.fontSize = "calc((100vh - 170px) / 3)";
+        }
+    }
+    else {
+        for (let i = 0; i < square.length; i++) {
+            square[i].style.fontSize = "180px";
+        }
+    }
+
+}
+
+window.onresize = viewportSize;

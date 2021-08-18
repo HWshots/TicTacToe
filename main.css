@@ -3,6 +3,7 @@
     --white: white;
     --gray: #eee;
     --square: rgb(68, 68, 131);
+    --border: greenyellow;
     --red: red;
 }
 
@@ -60,6 +61,19 @@ label {
     white-space: nowrap;
 }
 
+button {
+    background-color: var(--border);
+    padding: 5px 15px;
+    border: 1px solid var(--black);
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    white-space: nowrap;
+    color: var(--black);
+    cursor: pointer;
+    align-self: center;
+}
+
 #exit {
     margin: 0;
     background-color: var(--red);
@@ -82,7 +96,6 @@ label {
     max-height: 600px;
     width: 100vw;
     height: 100vw;
-    border: 5px solid var(--border);
     overflow: hidden;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -99,6 +112,10 @@ label {
     background-color: var(--square);
     width: 33.33%;
     height: 33.33%;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 180px;
 }
 
 .square:hover {
