@@ -118,11 +118,13 @@ button {
     font-size: 180px;
 }
 
-.square:hover {
+@media (hover: hover) {
+    .square:hover {
     border: 1px solid var(--black);
     -webkit-box-shadow: 0px 0px 30px var(--gray);
     box-shadow: 0px 0px 30px var(--gray);
     z-index: 100;
+}
 }
 
 .colorSelect {
